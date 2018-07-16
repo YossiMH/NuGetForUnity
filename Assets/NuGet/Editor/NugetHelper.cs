@@ -94,11 +94,7 @@
                 return;
             }
             
-#if UNITY_5_6_OR_NEWER
             DotNetVersion = PlayerSettings.GetApiCompatibilityLevel(EditorUserBuildSettings.selectedBuildTargetGroup);
-#else
-            DotNetVersion = PlayerSettings.apiCompatibilityLevel;
-#endif
 
             // Load the NuGet.config file
             LoadNugetConfigFile();
@@ -1164,20 +1160,11 @@
         {
             if (NugetConfigFile.Verbose)
             {
-#if UNITY_5_4_OR_NEWER
                 var stackTraceLogType = Application.GetStackTraceLogType(LogType.Log);
                 Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
-#else
-                var stackTraceLogType = Application.stackTraceLogType;
-                Application.stackTraceLogType = StackTraceLogType.None;
-#endif
                 Debug.LogFormat(format, args);
 
-#if UNITY_5_4_OR_NEWER
                 Application.SetStackTraceLogType(LogType.Log, stackTraceLogType);
-#else
-                Application.stackTraceLogType = stackTraceLogType;
-#endif
             }
         }
 
